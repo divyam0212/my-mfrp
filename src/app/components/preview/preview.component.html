@@ -1,41 +1,89 @@
 <br>
 <br>
-<div class="container">
+<div class="container" *ngIf="hero">
   <div id="accordion">
     <br>
     <div class="card">
       <div class="card-header">
-        {{hero.checkTitle}}&nbsp;
+        <span>
+          <i class="fas fa-exclamation-circle"></i>
+        </span>&nbsp;
+        <span *ngIf="hero.checkTitle">{{hero.checkTitle|uppercase}}</span>&nbsp;
+        <span *ngIf="!hero.checkTitle">TITLE IS NOT DEFINED</span>&nbsp;
         <span class="header">
-          Duration:
-          <span class="badge badge-secondary">{{hero.checkDuration}}</span>&nbsp;&nbsp;
-          <span class="badge badge-success">{{hero.checkType}}</span>
+          DURATION:
+          <span class="badge badge-pill badge-secondary" *ngIf="hero.checkDuration">{{hero.checkDuration}}</span>&nbsp;&nbsp;
+          <span class="badge badge-pill badge-secondary" *ngIf="!hero.checkDuration">DURATION NOT DEFINED</span>&nbsp;&nbsp;
+          <span class="badge badge-pill badge-success" *ngIf="hero.checkType">{{hero.checkType | uppercase}}</span>
+          <span class="badge badge-pill badge-success" *ngIf="!hero.checkType">TYPE NOT DEFINED</span>
         </span>
       </div>
       <div class="collapse show" data-parent="#accordion">
         <div class="card-body">
-          <div [innerHtml]="hero.checkDescription">
+          <div [innerHtml]="hero.checkDescription" *ngIf="hero.checkDescription">
           </div>
-          <br>
+          <div *ngIf="!hero.checkDescription">
+            CHECK DESCRIPTION IS NOT DEFINED
+          </div>
           <hr>
-          <br>
-
-          <div class="card">
-              <h5 class="card-header">INPUT</h5>
+          <div class="card-deck">
+            <div class="card">
+              <h6 class="card-title">
+                <span class="circle">
+                  <i class="fas fa-exclamation-circle"></i>
+                </span>INPUT</h6>
+              <!-- <h5 class="card-title">INPUT</h5> -->
               <div class="card-body">
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <p class="card-text" *ngIf="hero.checkInput">{{hero.checkInput}}</p>
+                <p class="card-text" *ngIf="!hero.checkInput">INPUT IS NOT DEFINED</p>
               </div>
             </div>
+            <div class="card">
+              <h6 class="card-title">
+                <span class="circle">
+                  <i class="fas fa-exclamation-circle"></i>
+                </span>OUTPUT</h6>
+              <!-- <h5 class="card-title">OUTPUT</h5> -->
+              <div class="card-body">
 
-
-          
+                <p class="card-text" *ngIf="hero.checkOutput">{{hero.checkOutput}}</p>
+                <p class="card-text" *ngIf="!hero.checkOutput">OUTPUT IS NOT DEFINED</p>
+              </div>
+            </div>
+          </div>
+          <div class="score">
+            <h6>
+              <b>Score Criteria:</b>
+            </h6>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Score Criteria</th>
+                  <th scope="col">Score</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="scores.length">
+                <tr *ngFor="let marks of scores; let i = index">
+                  <td scope="row">{{i+1}}</td>
+                  <td>{{marks.checkCondition}}</td>
+                  <td>{{marks.mark}}</td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="!scores.length">
+                <h6>SCORE CRITERIA NOT DEFINED. ADD TO COURSE AND EDIT TO ADD SCORE CRITERIA.</h6>
+              </tbody>
+            </table>
+          </div>
           <div class="check">
-            <button class="btn btn-info" (click)="backFn()">BACK</button> &nbsp; &nbsp;
-            <button class="btn btn-info" (click)="addCheck(hero)">PREVIEW</button>
+            <button class="btn btn-success" (click)="backFn()">BACK</button> &nbsp; &nbsp;
+            <button class="btn btn-success" (click)="addCheck(hero)">ADD CHECK TO COURSE</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+<div *ngIf="!hero" class="errorData">
+  ERROR IN RETRIEVING CHECK DATA
 </div>
