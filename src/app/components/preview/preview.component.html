@@ -1,0 +1,41 @@
+<br>
+<br>
+<div class="container">
+  <div id="accordion">
+    <br>
+    <div class="card">
+      <div class="card-header">
+        {{hero.checkTitle}}&nbsp;
+        <span class="header">
+          Duration:
+          <span class="badge badge-secondary">{{hero.checkDuration}}</span>&nbsp;&nbsp;
+          <span class="badge badge-success">{{hero.checkType}}</span>
+        </span>
+      </div>
+      <div class="collapse show" data-parent="#accordion">
+        <div class="card-body">
+          <div [innerHtml]="hero.checkDescription">
+          </div>
+          <br>
+          <hr>
+          <br>
+
+          <div class="card">
+              <h5 class="card-header">INPUT</h5>
+              <div class="card-body">
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+
+
+          
+          <div class="check">
+            <button class="btn btn-info" (click)="backFn()">BACK</button> &nbsp; &nbsp;
+            <button class="btn btn-info" (click)="addCheck(hero)">PREVIEW</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

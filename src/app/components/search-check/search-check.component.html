@@ -1,0 +1,43 @@
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="search-hero">
+      <input class="form-control input-lg icon" (change)="onChange($event)" type="text" name="search" [(ngModel)]="searchText"
+        autocomplete="off" placeholder="Search for existing check">
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div *ngFor="let hero of empData | filter:searchText">
+    <div *ngIf=" onChange()">
+      <div id="accordion">
+        <br>
+        <div class="card">
+          <div class="card-header">
+            <a class="card-link" data-toggle="collapse show" [href]="'#collapse'+hero.checkId">
+              {{hero.checkTitle}}&nbsp;
+            </a>
+            <span class="header">
+              Duration:
+              <span class="badge badge-secondary">{{hero.checkDuration}}</span>&nbsp;&nbsp;
+              <span class="badge badge-success">{{hero.checkType}}</span>
+            </span>
+          </div>
+          <div [id]="'collapse'+hero.checkId" class="collapse show" data-parent="#accordion">
+            <div class="card-body">
+              {{hero.checkDescription}}
+              <br>
+              <br>
+              <div class="check">
+                  <button class="btn btn-info" (click)="addCheck(hero)">ADD CHECK TO COURSE</button> &nbsp; &nbsp;
+                  <button class="btn btn-info" (click)="previewCheck(hero.checkId)">PREVIEW</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

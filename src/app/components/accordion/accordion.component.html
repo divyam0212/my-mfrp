@@ -1,0 +1,130 @@
+<!-- <div class="container">
+    <div class="row">
+        <div class="search-hero">
+          <form>
+              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder=" &#61442;  Start searching for a employee">
+          </form>
+        </div>
+    </div> <br> <br> <br>
+    <div class="row">
+        <div *ngFor="let hero of empData | filter:searchText">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" [href]="'#collapse'+hero.empId"><span class="glyphicon glyphicon-book">
+                              </span> {{hero.empName}}</a>
+                        </h4>
+                    </div>
+                    <div [id]="'collapse'+hero.empId" class="panel-collapse collapse">
+                        <b> Hello {{hero.empName}} !! </b>
+                                    <br> {{hero.empSalary}}
+                                    <br> {{hero.department.departmentName}}
+                                    <br> {{hero.department.departmentLocation}}
+                                    <br>
+                                    <div *ngFor="let skill of hero.skillsList">
+                                      - {{skill.skillName}}
+                                    </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div> -->
+
+<!-- <br><br>
+<form>
+<div class="container">
+    <div class="row">
+        <div class="search-hero">
+          
+              <input class="form-control input-lg" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder=" &#xf0e0;  Search for existing check">
+          
+        </div>
+    </div> <br> <br> <br>
+    <div *ngFor="let hero of empData | filter:searchText">
+        <div id="accordion">
+            <div class="card">
+                  <div class="card-header">
+                    <a class="card-link" data-toggle="collapse" [href]="'#collapse'+hero.empId">
+                        <span class="glyphicon glyphicon-menu-down"></span>&nbsp;{{hero.empName}}
+                    </a>
+                  </div>
+                  <div [id]="'collapse'+hero.empId" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <b> Hello {{hero.empName}} !! </b>
+                                    <br> {{hero.empSalary}}
+                                    <br> {{hero.department.departmentName}}
+                                    <br> {{hero.department.departmentLocation}}
+                                    <br>
+                                    <div *ngFor="let skill of hero.skillsList">
+                                      - {{skill.skillName}}
+                                    </div>
+                                    <div class="check">
+                                        <select class="form-control dropdn" id="sel1">
+                                            <option *ngFor="let type of checkType">{{type.checkName}}</option>
+                                          </select>
+                                          <span class="glyphicon glyphicon-plus" (click)="addCheck()"></span>
+                                          
+                                    </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form> -->
+<!-- <button class="btn"><span class="glyphicon glyphicon-plus"></span>ADD CHECK</button> -->
+
+<div class="container">
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><span class="icon">&#xf067;</span>Add Existing Check</button>
+      
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog modal-lg">
+          
+            <div class="modal-content">
+              <div class="modal-header" >
+                    <h4 class="modal-title">Add Existing Checks</h4>
+                     <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+              </div>
+              <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="search-hero">
+                        </div>
+                    </div> <br> <br> <br>
+                    <div *ngFor="let hero of filteredProblemStatementTemplates" >
+                        <div id="accordion">
+                            <div class="card">
+                                  <div class="card-header">
+                                    <a class="card-link" data-toggle="collapse" [href]="'#collapse'+hero.checkId">
+                                            {{hero.checkTitle}}&nbsp; <span class="icon1">&#xf063;</span> 
+                                    </a>
+                                  </div>
+                                  <div [id]="'collapse'+hero.checkId" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                            {{hero.checkDescription}} <br><br>
+                                            <div class="check">
+                                                <!-- <select class="form-control dropdn" id="sel1" [(ngModel)]="checkName" [ngModelOptions]="{standalone: true}">
+                                                    <option *ngFor="let type of checkType">{{type}}</option>
+                                                </select> -->
+                                                <span *ngFor="let type of checkType">
+                                                        <button type="button" class="btn btn-md" (click)="addCheck(type,hero.checkId)" style="color:blue;"><span class="icon">&#xf067;</span> ADD AS {{type}}</button>
+                                                </span>
+                                              
+                                            </div>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
