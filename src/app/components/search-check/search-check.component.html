@@ -1,6 +1,6 @@
 <br>
 <br>
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="search-hero">
       <input class="form-control input-lg icon" (change)="onChange($event)" type="text" name="search" [(ngModel)]="searchText"
@@ -10,30 +10,42 @@
   <br>
   <br>
   <br>
-  <div *ngFor="let hero of empData | filter:searchText">
+  <div *ngFor="let hero of empData | filter:searchText:'checkTitle'">
     <div *ngIf=" onChange()">
       <div id="accordion">
         <br>
         <div class="card">
           <div class="card-header">
+            <span>
+              <i class="fas fa-exclamation-circle"></i>
+            </span>&nbsp;
             <a class="card-link" data-toggle="collapse show" [href]="'#collapse'+hero.checkId">
-              {{hero.checkTitle}}&nbsp;
+              <span *ngIf="hero.checkTitle">{{hero.checkTitle | uppercase}}</span>&nbsp;
+              <span *ngIf="!hero.checkTitle">TITLE IS NOT DEFINED</span>&nbsp;
             </a>
             <span class="header">
-              Duration:
-              <span class="badge badge-secondary">{{hero.checkDuration}}</span>&nbsp;&nbsp;
-              <span class="badge badge-success">{{hero.checkType}}</span>
+              <span>
+                  <i class="fa fa-clock"></i>
+              </span>&nbsp;
+              <span class="badge badge-secondary" *ngIf="hero.checkDuration">{{hero.checkDuration}} days</span>&nbsp;&nbsp;
+              <span class="badge badge-secondary" *ngIf="!hero.checkDuration">DURATION NOT DEFINED</span>&nbsp;&nbsp;
+              <span class="badge badge-secondary" *ngIf="hero.checkType">{{hero.checkType}}</span>
+              <span class="badge badge-secondary" *ngIf="!hero.checkType">TYPE NOT DEFINED</span>
             </span>
           </div>
           <div [id]="'collapse'+hero.checkId" class="collapse show" data-parent="#accordion">
             <div class="card-body">
-              {{hero.checkDescription}}
+                <div [innerHtml]="hero.checkDescription" *ngIf="hero.checkDescription">
+                </div>
+                <div *ngIf="!hero.checkDescription">
+                  CHECK DESCRIPTION IS NOT DEFINED
+                </div>
+              <hr>
               <br>
-              <br>
-              <div class="check">
-                  <button class="btn btn-info" (click)="addCheck(hero)">ADD CHECK TO COURSE</button> &nbsp; &nbsp;
-                  <button class="btn btn-info" (click)="previewCheck(hero.checkId)">PREVIEW</button>
-              </div>
+                <div class="check">
+                  <button class="btn btn-success" id="b1" (click)="addCheck(hero)">ADD CHECK TO COURSE</button> &nbsp; &nbsp;
+                  <button class="btn btn-success" id="b2" (click)="previewCheck(hero.checkId)">PREVIEW</button>
+                </div>
             </div>
           </div>
         </div>
@@ -41,3 +53,54 @@
     </div>
   </div>
 </div>
+
+<!-- <div class="container-fluid">
+  <h2>SEARCH AND ADD CHECKS TO COURSE</h2>
+  <div class="row">
+    <div class="search-hero">
+      <input class="form-control input-lg icon" (change)="onChange($event)" type="text" name="search" [(ngModel)]="searchText"
+        autocomplete="off" placeholder="Search for existing check">
+    </div>
+  </div> <br><br>
+  <div class="row">
+    <div class="card-deck">
+      <div class="col-lg-3 col-md-6" *ngFor="let hero of empData | filter:exitComponentData">
+        <div class="card">
+          <div class="card-header">
+            <span>
+              <i class="fas fa-exclamation-circle"></i>
+            </span>&nbsp;
+            <a class="card-link" data-toggle="collapse show" [href]="'#collapse'+hero.checkId">
+              <span *ngIf="hero.checkTitle">{{hero.checkTitle | uppercase}}</span>&nbsp;
+              <span *ngIf="!hero.checkTitle">TITLE IS NOT DEFINED</span>&nbsp;
+            </a>
+            <span class="header">
+              <span>
+                <i class="fa fa-clock"></i>
+              </span>&nbsp;
+              <span class="badge badge-secondary" *ngIf="hero.checkDuration">{{hero.checkDuration}}</span>&nbsp;&nbsp;
+              <span class="badge badge-secondary" *ngIf="!hero.checkDuration">DURATION NOT DEFINED</span>&nbsp;&nbsp;
+              <span class="badge badge-success" *ngIf="hero.checkType">{{hero.checkType}}</span>
+              <span class="badge badge-success" *ngIf="!hero.checkType">TYPE NOT DEFINED</span>
+            </span>
+          </div>
+          <div class="card-body">
+            <div [innerHtml]="hero.checkDescription" *ngIf="hero.checkDescription">
+            </div>
+            <div *ngIf="!hero.checkDescription">
+              CHECK DESCRIPTION IS NOT DEFINED
+            </div>
+            <hr>
+            <br>
+            <div class="check">
+              <span class="circle" (click)="addCheck(hero)">
+                  <i class="fas fa-plus"></i>
+              </span> &nbsp; &nbsp;
+              <button class="btn btn-success" id="b2" (click)="previewCheck(hero.checkId)">PREVIEW</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
